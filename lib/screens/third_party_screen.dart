@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class ThirdPartyScreen extends StatelessWidget {
@@ -19,7 +20,7 @@ class ThirdPartyScreen extends StatelessWidget {
             children: [
               Card(
                 margin: const EdgeInsets.only(bottom: 12),
-                color: const Color(0xFFFFF3D6),
+                color: AppColors.of(context).noticeCard,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
@@ -100,7 +101,7 @@ class ThirdPartyScreen extends StatelessWidget {
                           'pubspec.yaml file.',
                     ),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.black.withValues(alpha: 0.6),
+                      color: AppColors.of(context).muted,
                     ),
                   ),
                 ),
@@ -113,24 +114,21 @@ class ThirdPartyScreen extends StatelessWidget {
   }
 
   Widget _row(BuildContext context, String name, String license, String use) {
+    final c = AppColors.of(context);
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: const Color(0xFF8C1F28).withValues(alpha: 0.12),
-          child: const Icon(
-            Icons.extension,
-            color: Color(0xFF8C1F28),
-            size: 20,
-          ),
+          backgroundColor: c.primary.withValues(alpha: 0.15),
+          child: Icon(Icons.extension, color: c.primary, size: 20),
         ),
         title: Text(name, style: const TextStyle(fontWeight: FontWeight.w700)),
         subtitle: Text('$license · $use'),
         trailing: Text(
           license,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 11,
-            color: Color(0xFF8C1F28),
+            color: c.primary,
             fontWeight: FontWeight.w600,
           ),
         ),

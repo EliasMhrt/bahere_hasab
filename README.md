@@ -11,15 +11,24 @@ An offline Ethiopian Orthodox Tewahedo calendar app — calculates feasts, fasts
 - Date converter between Ethiopic and Gregorian (ቀን መለወጫ)
 - Learn the Bahire Hasab method in brief (ትምህርት)
 - Bilingual: Amharic & English
-- Offline, no permissions, no tracking
+- Optional fasting reminder — a persistent notification that names the
+  current fasting season and rotates between the Ethiopian and Gregorian date
+- Offline, no tracking; asks for notification permission only if you enable the
+  reminder
 
 ## Install
 
-Enable "Install unknown apps" on your device, open the latest APK from **Releases**, and follow the prompts.
+Enable "Install unknown apps" on your device, open the APK for your phone from **Releases**, and follow the prompts.
 
+- `app-arm64-v8a-release.apk` — most phones from ~2015 onwards (64-bit)
+- `app-armeabi-v7a-release.apk` — older 32-bit phones
 - Minimum Android version: Android 5.0 (API 21)
 - Package name: `com.baherehasab.bahere_hasab`
 
+Builds are produced per CPU architecture (`--split-per-abi`), so each APK is
+about half the size of a single universal build and no PC/emulator (x86_64)
+payload is shipped.
+
 ## Privacy
 
-The app is fully offline. It collects, stores, and transmits nothing. Preferences and language are kept only in memory for the current session.
+The app is fully offline. It collects, stores, and transmits nothing. Look-and-feel preferences and language are kept only in memory for the current session. If you switch on the fasting reminder, its on/off state is stored locally on your device (using Android SharedPreferences) so the reminder can continue after a restart; it is removed when you uninstall the app. Enabling the reminder also requests the notification permission, used solely to display the ongoing reminder.

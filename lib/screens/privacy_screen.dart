@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class PrivacyScreen extends StatelessWidget {
@@ -57,21 +58,31 @@ class PrivacyScreen extends StatelessWidget {
                 ),
                 L10n.t(
                   'ቋንቋ፣ የጽሁፍ መጠንና መልክ የመሳሰሉ ምርጫዎች '
-                      'በመሣሪያዎ ብቻ ውስጥ ይቆያሉ። ወደ ውጭ አይወጡም። '
-                      'መተግበሪያውን ሲያስወግዱ (uninstall) ይጠፋሉ።',
+                      'በመሣሪያዎ ብቻ ውስጥ ይቆያሉ። የጾም ማስታወሻ '
+                      'ሁኔታም (በርቷል/ጠፍቷል) በመሣሪያዎ ላይ ብቻ '
+                      'ይቀመጣል። ወደ ውጭ አይወጡም። መተግበሪያውን '
+                      'ሲያስወግዱ (uninstall) ይጠፋሉ።',
                   'Preferences such as language, text size and appearance stay '
-                      'only on your device and are never transmitted. They are '
-                      'cleared when the app is uninstalled.',
+                      'only on your device and are never transmitted. The '
+                      'fasting-reminder setting (on/off) is stored on your '
+                      'device too. Everything is cleared when the app is '
+                      'uninstalled.',
                 ),
               ),
               _s(
                 context,
                 L10n.t('ፈቃዶች (Permissions)', 'Permissions'),
                 L10n.t(
-                  'መተግበሪያው ምንም አይነት የአካል (sensitive) ፈቃድ '
-                      'አይጠይቅም፣ የበይነመረብ ፈቃድም አይያዝም።',
-                  'The app requests no sensitive permission and holds no '
-                      'internet permission.',
+                  'የበይነመረብ ፈቃድ አይያዝም። የጾም ማስታወሻን ካበሩ '
+                      'ብቻ፣ የማሳወቂያ (notification) ፈቃድ ይጠየቃል፤ '
+                      'ይህም በስልክዎ ላይ ዘዴያዊ (ongoing) ማሳወቂያ '
+                      'ለማሳየት ብቻ ነው። ይህ ፈቃድ በማንኛውም ጊዜ '
+                      'በቅንብሮች ውስጥ ሊጠፋ ይችላል።',
+                  'The app holds no internet permission. Only if you switch on '
+                      'the fasting reminder does it ask for the notification '
+                      'permission, and only to show the ongoing reminder on '
+                      'your phone. You can turn it off again in Settings at any '
+                      'time.',
                 ),
               ),
               _s(
@@ -145,8 +156,9 @@ class PrivacyScreen extends StatelessWidget {
   }
 
   Widget _notice(BuildContext context) {
+    final c = AppColors.of(context);
     return Card(
-      color: const Color(0xFFFFF3D6),
+      color: c.noticeCard,
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Text(
@@ -159,7 +171,7 @@ class PrivacyScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontStyle: FontStyle.italic,
-            color: Colors.brown.withValues(alpha: 0.8),
+            color: c.noticeText,
           ),
         ),
       ),

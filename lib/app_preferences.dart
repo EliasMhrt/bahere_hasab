@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// User-customizable preferences for the app. All values are kept in memory
-/// only — nothing is stored on disk or transmitted anywhere.
+/// User-customizable preferences for the app. The look-and-feel values are kept
+/// in memory only; the calendar reminder switch is persisted locally on the
+/// device so the reminder can survive restarts.
 class AppPrefs {
   AppPrefs._();
 
@@ -12,6 +13,7 @@ class AppPrefs {
     AppThemeMode.light,
   );
   static final ValueNotifier<bool> highContrast = ValueNotifier(false);
+  static final ValueNotifier<bool> reminder = ValueNotifier(false);
 
   static double scaleFor(AppTextScale s) => switch (s) {
     AppTextScale.small => 0.9,

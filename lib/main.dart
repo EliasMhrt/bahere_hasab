@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 
 import 'app_preferences.dart';
 import 'l10n.dart';
+import 'notification_service.dart';
 import 'screens/home_screen.dart';
 
 void main() {
+  FlutterForegroundTask.initCommunicationPort();
   runApp(const BahereHasabApp());
 }
 
@@ -16,18 +19,22 @@ class BahereHasabApp extends StatefulWidget {
   State<BahereHasabApp> createState() => _BahereHasabAppState();
 }
 
-class _BahereHasabAppState extends State<BahereHasabApp> {
+class _BahereHasabAppState extends State<BahereHasabApp>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     L10n.lang.addListener(_onPrefsChanged);
     AppPrefs.textScale.addListener(_onPrefsChanged);
     AppPrefs.themeMode.addListener(_onPrefsChanged);
     AppPrefs.highContrast.addListener(_onPrefsChanged);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initReminder());
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     L10n.lang.removeListener(_onPrefsChanged);
     AppPrefs.textScale.removeListener(_onPrefsChanged);
     AppPrefs.themeMode.removeListener(_onPrefsChanged);
@@ -35,7 +42,25 @@ class _BahereHasabAppState extends State<BahereHasabApp> {
     super.dispose();
   }
 
-  void _onPrefsChanged() => setState(() {});
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      NotificationService.markAppOpened();
+    }
+  }
+
+  Future<void> _initReminder() async {
+    NotificationService.init();
+    await NotificationService.markAppOpened();
+    await NotificationService.saveLanguage(L10n.lang.value);
+    AppPrefs.reminder.value = await NotificationService.isEnabled();
+    await NotificationService.resume();
+  }
+
+  void _onPrefsChanged() {
+    NotificationService.saveLanguage(L10n.lang.value);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,8 +123,8 @@ class _BahereHasabAppState extends State<BahereHasabApp> {
       ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: scheme.primary,
-        foregroundColor: isDark ? Colors.white : Colors.white,
+        backgroundColor: isDark ? const Color(0xFF2A1F20) : scheme.primary,
+        foregroundColor: isDark ? scheme.onSurface : scheme.onPrimary,
       ),
       cardTheme: CardThemeData(
         elevation: 1,

@@ -231,10 +231,17 @@ void main() {
       final inLent = CalendarMath.jdnFromGregorian(2026, 3, 27);
       expect(Festivals.fastStatusOnJdn(inLent), FastStatus.seasonal);
 
-      // Tuesday 3 Nov 2026 (US midterms) → Wednesday 4 Nov 2026 is 46 days
-      // before Christmas, so it is a plain Wednesday fast (Advent begins
-      // Hidar 15, ~22 Nov, and the Apostles fast ended 12 July).
-      final wednesday = CalendarMath.jdnFromGregorian(2026, 11, 4);
+      // Wednesday 4 Nov 2026 falls inside Zemene Tsige (Meskerem 16 –
+      // Tikimt 26, ~27 Sep – 5 Nov 2026), so it is a seasonal fast.
+      final tsige = CalendarMath.jdnFromGregorian(2026, 11, 4);
+      expect(Festivals.fastStatusOnJdn(tsige), FastStatus.seasonal);
+      final tsigeSeason = Festivals.fastingSeasonOnJdn(tsige);
+      expect(tsigeSeason?.englishName, 'Fast of Tsige (Zemene Tsige)');
+
+      // Wednesday 11 Nov 2026 sits between Zemene Tsige and Advent (Hidar 15,
+      // ~24 Nov) and after the Apostles fast ended (12 July), so it is a plain
+      // Wednesday fast.
+      final wednesday = CalendarMath.jdnFromGregorian(2026, 11, 11);
       expect(Festivals.fastStatusOnJdn(wednesday), FastStatus.weekly);
 
       // A Sunday inside the Easter–Pentecost season is not a fast day.

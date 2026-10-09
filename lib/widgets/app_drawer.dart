@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../screens/accessibility_screen.dart';
 import '../screens/calculator_screen.dart';
 import '../screens/calendar_screen.dart';
@@ -17,22 +18,23 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = AppColors.of(context);
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              color: const Color(0xFF8C1F28),
+              color: c.primary,
               padding: const EdgeInsets.fromLTRB(16, 20, 16, 18),
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(
                     Icons.calendar_view_month,
-                    color: Colors.white,
+                    color: c.onPrimary,
                     size: 32,
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +42,7 @@ class AppDrawer extends StatelessWidget {
                         Text(
                           'ባህረ ሃሳብ',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: c.onPrimary,
                             fontSize: 18,
                             fontWeight: FontWeight.w800,
                           ),
@@ -48,7 +50,7 @@ class AppDrawer extends StatelessWidget {
                         Text(
                           'Bahire Hasab',
                           style: TextStyle(
-                            color: Color(0xFFE8D5C4),
+                            color: c.onPrimary.withValues(alpha: 0.75),
                             fontSize: 12,
                           ),
                         ),
@@ -129,14 +131,11 @@ class AppDrawer extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Text(
                 L10n.t(
-                  'በ ኦርያሬስ የተሰራ · ስሪት 1.0.0',
-                  'Developed by Oryares · v1.0.0',
+                  'በ ኦርያሬስ የተሰራ · ስሪት 1.1.0',
+                  'Developed by Oryares · v1.1.0',
                 ),
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black.withValues(alpha: 0.45),
-                ),
+                style: TextStyle(fontSize: 12, color: c.faint),
               ),
             ),
           ],
@@ -173,7 +172,7 @@ class _GroupLabel extends StatelessWidget {
           fontSize: 12,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.5,
-          color: const Color(0xFF8C1F28).withValues(alpha: 0.7),
+          color: AppColors.of(context).primary,
         ),
       ),
     );
@@ -190,7 +189,7 @@ class _Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: const Color(0xFF8C1F28)),
+      leading: Icon(icon, color: AppColors.of(context).primary),
       title: Text(label),
       dense: true,
       onTap: onTap,

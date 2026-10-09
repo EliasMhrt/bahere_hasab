@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 import '../src/calendar_math.dart';
 
@@ -324,6 +325,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
       e = CalendarMath.ethiopicFromJdn(jdn);
     }
     final wd = CalendarMath.weekdayIndex(jdn);
+    final c = AppColors.of(context);
 
     return Card(
       child: Padding(
@@ -340,10 +342,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
             const SizedBox(height: 8),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(
-                Icons.calendar_month,
-                color: Color(0xFF8C1F28),
-              ),
+              leading: Icon(Icons.calendar_month, color: c.primary),
               title: Text(
                 L10n.t('ኢትዮጵያዊ', 'Ethiopian'),
                 style: const TextStyle(fontSize: 13),
@@ -359,7 +358,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.event, color: Color(0xFF3E5C9A)),
+              leading: Icon(Icons.event, color: c.weeklyFast),
               title: Text(
                 L10n.t('ጎርጎርያን', 'Gregorian'),
                 style: const TextStyle(fontSize: 13),
@@ -374,10 +373,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(
-                Icons.calendar_today,
-                color: Color(0xFF1E7A46),
-              ),
+              leading: Icon(Icons.calendar_today, color: c.noFast),
               title: Text(
                 L10n.t('የሳምንቱ ቀን', 'Weekday'),
                 style: const TextStyle(fontSize: 13),

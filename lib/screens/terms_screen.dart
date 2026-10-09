@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class TermsScreen extends StatelessWidget {
@@ -123,8 +124,9 @@ class TermsScreen extends StatelessWidget {
   }
 
   Widget _notice(BuildContext context) {
+    final c = AppColors.of(context);
     return Card(
-      color: const Color(0xFFFFF3D6),
+      color: c.noticeCard,
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Text(
@@ -137,7 +139,7 @@ class TermsScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontStyle: FontStyle.italic,
-            color: Colors.brown.withValues(alpha: 0.8),
+            color: c.noticeText,
           ),
         ),
       ),

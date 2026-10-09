@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app_preferences.dart';
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class AccessibilityScreen extends StatelessWidget {
@@ -114,7 +115,7 @@ class AccessibilityScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           title: Text(L10n.t('ከፍተኛ ንጽጽር', 'High contrast')),
                           value: hc,
-                          activeTrackColor: const Color(0xFF8C1F28),
+                          activeTrackColor: AppColors.of(context).primary,
                           onChanged: (v) => AppPrefs.highContrast.value = v,
                         );
                       },
@@ -134,7 +135,7 @@ class AccessibilityScreen extends StatelessWidget {
                           'for help.',
                     ),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.black.withValues(alpha: 0.6),
+                      color: AppColors.of(context).muted,
                     ),
                   ),
                 ),
@@ -160,8 +161,10 @@ class AccessibilityScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundColor: const Color(0xFF8C1F28).withValues(alpha: 0.12),
-              child: Icon(icon, color: const Color(0xFF8C1F28)),
+              backgroundColor: AppColors.of(context).primary.withValues(
+                alpha: 0.15,
+              ),
+              child: Icon(icon, color: AppColors.of(context).primary),
             ),
             const SizedBox(width: 12),
             Expanded(

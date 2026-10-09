@@ -5,6 +5,23 @@ enum EventKind { fixedFeast, moveableFeast, fasting, commemoration }
 
 enum FastStatus { none, weekly, seasonal }
 
+/// A named fasting season of the Ethiopian Orthodox Tewahedo Church.
+class FastingSeason {
+  final String amharicName;
+  final String englishName;
+  final int startJdn;
+  final int endJdn;
+
+  const FastingSeason({
+    required this.amharicName,
+    required this.englishName,
+    required this.startJdn,
+    required this.endJdn,
+  });
+
+  String nameFor(bool amharic) => amharic ? amharicName : englishName;
+}
+
 class FixedFeast {
   final int month;
   final int day;
@@ -273,6 +290,73 @@ class Festivals {
     return events.where((e) => e.startJdn <= jdn && jdn <= e.endJdn).toList();
   }
 
+  /// The named fasting seasons of a given Ethiopian year.
+  ///
+  /// Order matters: when seasons overlap (e.g. Gahad coincides with the last
+  /// day of the Advent fast), the earlier entry is reported by
+  /// [fastingSeasonOnJdn].
+  static List<FastingSeason> fastingSeasonsForYear(int ethiopicYear) {
+    final bh = BahireHasab(ethiopicYear);
+    return [
+      FastingSeason(
+        amharicName: 'ጾመ ጽጌ (ጾመ ቍስቍዋም)',
+        englishName: 'Fast of Tsige (Zemene Tsige)',
+        startJdn: bh.jdnOf(1, 16),
+        endJdn: bh.jdnOf(2, 26),
+      ),
+      FastingSeason(
+        amharicName: 'ጾመ ነነዌ',
+        englishName: 'Fast of Nineveh',
+        startJdn: bh.ninevehStartJdn,
+        endJdn: bh.ninevehEndJdn,
+      ),
+      FastingSeason(
+        amharicName: 'ዐቢይ ጾም (ሁዳዴ)',
+        englishName: 'Great Lent (Hudade)',
+        startJdn: bh.abiyTsomStartJdn,
+        endJdn: bh.abiyTsomEndJdn,
+      ),
+      FastingSeason(
+        amharicName: 'ጾም ገሐድ',
+        englishName: 'Fast of Gahad',
+        startJdn: bh.jdnOf(4, 28),
+        endJdn: bh.jdnOf(4, 28),
+      ),
+      FastingSeason(
+        amharicName: 'ጾመ ነቢያት (ጾመ ልደት)',
+        englishName: 'Fast of the Prophets (Advent)',
+        startJdn: bh.jdnOf(3, 15),
+        endJdn: bh.jdnOf(4, 28),
+      ),
+      FastingSeason(
+        amharicName: 'ጾመ ፍልሰታ',
+        englishName: 'Fast of the Assumption (Filseta)',
+        startJdn: bh.jdnOf(12, 1),
+        endJdn: bh.jdnOf(12, 15),
+      ),
+      if (bh.hasHawaryatFast)
+        FastingSeason(
+          amharicName: 'ጾመ ሐዋርያት',
+          englishName: 'Fast of the Apostles',
+          startJdn: bh.hawaryatStartJdn,
+          endJdn: bh.hawaryatEndJdn,
+        ),
+    ];
+  }
+
+  /// The named fasting season active on [jdn], or null if none is active.
+  ///
+  /// Weekly (Wednesday/Friday) fasts are not a season and return null.
+  static FastingSeason? fastingSeasonOnJdn(int jdn) {
+    final et = CalendarMath.ethiopicFromJdn(jdn);
+    for (final season in fastingSeasonsForYear(et.year)) {
+      if (jdn >= season.startJdn && jdn <= season.endJdn) {
+        return season;
+      }
+    }
+    return null;
+  }
+
   static FastStatus fastStatusOnJdn(int jdn) {
     final et = CalendarMath.ethiopicFromJdn(jdn);
     final bh = BahireHasab(et.year);
@@ -281,6 +365,7 @@ class Festivals {
       return FastStatus.none;
     }
 
+    final inTsige = jdn >= bh.jdnOf(1, 16) && jdn <= bh.jdnOf(2, 26);
     final inNineveh = jdn >= bh.ninevehStartJdn && jdn <= bh.ninevehEndJdn;
     final inAbiy = jdn >= bh.abiyTsomStartJdn && jdn <= bh.abiyTsomEndJdn;
     final inNebiyat = jdn >= bh.jdnOf(3, 15) && jdn <= bh.jdnOf(4, 28);
@@ -290,7 +375,12 @@ class Festivals {
         jdn >= bh.hawaryatStartJdn &&
         jdn <= bh.hawaryatEndJdn;
 
-    if (inNineveh || inAbiy || inNebiyat || inFilseta || inHawaryat) {
+    if (inTsige ||
+        inNineveh ||
+        inAbiy ||
+        inNebiyat ||
+        inFilseta ||
+        inHawaryat) {
       return FastStatus.seasonal;
     }
 

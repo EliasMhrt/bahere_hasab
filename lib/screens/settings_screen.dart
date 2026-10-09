@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../app_preferences.dart';
 import '../l10n.dart';
+import '../notification_service.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -95,8 +97,51 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ),
                       value: hc,
-                      activeTrackColor: const Color(0xFF8C1F28),
+                      activeTrackColor: AppColors.of(context).primary,
                       onChanged: (v) => AppPrefs.highContrast.value = v,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 12),
+              ValueListenableBuilder(
+                valueListenable: AppPrefs.reminder,
+                builder: (context, reminder, _) {
+                  return Card(
+                    child: SwitchListTile(
+                      title: Text(
+                        L10n.t('የጾም ማስታወሻ', 'Fasting reminder'),
+                      ),
+                      subtitle: Text(
+                        L10n.t(
+                          'የአሁኑን የጾም ወቅትና ቀን በማሳወቂያ አሞሌ ላይ ያሳያል',
+                          'Shows the current fasting season and date in the '
+                              'notification bar',
+                        ),
+                      ),
+                      value: reminder,
+                      activeTrackColor: AppColors.of(context).primary,
+                      onChanged: (value) async {
+                        if (value) {
+                          final granted = await NotificationService.enable();
+                          AppPrefs.reminder.value = granted;
+                          if (!granted && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  L10n.t(
+                                    'ማሳወቂያ ፈቃድ አልተሰጠም።',
+                                    'Notification permission was not granted.',
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        } else {
+                          await NotificationService.disable();
+                          AppPrefs.reminder.value = false;
+                        }
+                      },
                     ),
                   );
                 },
@@ -113,7 +158,7 @@ class SettingsScreen extends StatelessWidget {
                           'recorded or sent anywhere.',
                     ),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.black.withValues(alpha: 0.6),
+                      color: AppColors.of(context).muted,
                     ),
                   ),
                 ),

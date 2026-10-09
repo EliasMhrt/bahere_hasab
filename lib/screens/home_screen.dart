@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../src/bahire_hasab.dart';
 import '../src/calendar_math.dart';
 import '../src/festivals.dart';
@@ -38,10 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final c = AppColors.of(context);
     final et = CalendarMath.ethiopicFromJdn(_todayJdn);
     final bh = BahireHasab(et.year);
     final weekday = CalendarMath.weekdayIndex(_todayJdn);
     final status = Festivals.fastStatusOnJdn(_todayJdn);
+    final season = Festivals.fastingSeasonOnJdn(_todayJdn);
     final events = Festivals.eventsForYear(et.year);
     final todaysEvents = Festivals.eventsOnJdn(
       events,
@@ -86,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.today, color: Color(0xFF8C1F28)),
+                      Icon(Icons.today, color: c.primary),
                       const SizedBox(width: 8),
                       Text(
                         L10n.t('ዛሬ', 'Today'),
@@ -98,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     _formattedEthiopicDate,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: const Color(0xFF8C1F28),
+                      color: c.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -112,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 12),
-                  _statusChip(status),
+                  _statusChip(status, season),
                   if (todaysEvents.isNotEmpty) ...[
                     const SizedBox(height: 12),
                     Text(
@@ -124,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                           .join(' · '),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: const Color(0xFF8C1F28),
+                        color: c.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -185,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w700,
                 fontStyle: FontStyle.italic,
                 letterSpacing: 1.2,
-                color: Colors.black.withValues(alpha: 0.55),
+                color: c.faint,
               ),
             ),
           ),
@@ -193,10 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Center(
             child: Text(
               L10n.t('© ኦርያሬስ', '© Oryares'),
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.black.withValues(alpha: 0.35),
-              ),
+              style: TextStyle(fontSize: 11, color: c.faint),
             ),
           ),
           const SizedBox(height: 8),
@@ -205,25 +205,28 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _statusChip(FastStatus status) {
+  Widget _statusChip(FastStatus status, FastingSeason? season) {
+    final c = AppColors.of(context);
     String label;
     IconData icon;
     Color color;
     switch (status) {
       case FastStatus.seasonal:
-        label = L10n.t('የጾም ወቅት', 'Full fasting season');
+        label =
+            season?.nameFor(L10n.isAmharic) ??
+            L10n.t('የጾም ወቅት', 'Full fasting season');
         icon = Icons.fastfood;
-        color = const Color(0xFF8C1F28);
+        color = c.fasting;
         break;
       case FastStatus.weekly:
         label = L10n.t('ሳምንታዊ ጾም (ረቡዕ/ዓርብ)', 'Wednesday/Friday fast');
         icon = Icons.filter_drama;
-        color = const Color(0xFF3E5C9A);
+        color = c.weeklyFast;
         break;
       case FastStatus.none:
         label = L10n.t('በዓል / ጾም የለም', 'No fasting today');
         icon = Icons.celebration;
-        color = const Color(0xFF1E7A46);
+        color = c.noFast;
         break;
     }
     return Chip(
@@ -244,12 +247,13 @@ class _HomeScreenState extends State<HomeScreen> {
     required String subtitle,
     required VoidCallback onTap,
   }) {
+    final c = AppColors.of(context);
     return Card(
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         leading: CircleAvatar(
-          backgroundColor: const Color(0xFF8C1F28).withValues(alpha: 0.12),
-          child: Icon(icon, color: const Color(0xFF8C1F28)),
+          backgroundColor: c.primary.withValues(alpha: 0.15),
+          child: Icon(icon, color: c.primary),
         ),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
         subtitle: Text(subtitle),

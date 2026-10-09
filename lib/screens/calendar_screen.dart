@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 import '../src/bahire_hasab.dart';
 import '../src/calendar_math.dart';
@@ -153,10 +154,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Center(
               child: Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF6E4B12),
+                  color: AppColors.of(context).weekdayLabel,
                 ),
               ),
             ),
@@ -245,20 +246,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
       context: context,
       showDragHandle: true,
       builder: (context) {
+        final c = AppColors.of(context);
         String statusText;
         Color statusColor;
         switch (status) {
           case FastStatus.seasonal:
             statusText = L10n.t('በጾም ወቅት ውስጥ ነው', 'In a fasting season');
-            statusColor = const Color(0xFF8C1F28);
+            statusColor = c.fasting;
             break;
           case FastStatus.weekly:
             statusText = L10n.t('ሳምንታዊ ጾም (ረቡዕ/ዓርብ)', 'Wednesday/Friday fast');
-            statusColor = const Color(0xFF3E5C9A);
+            statusColor = c.weeklyFast;
             break;
           case FastStatus.none:
             statusText = L10n.t('የጾም ቀን አይደለም', 'Not a fasting day');
-            statusColor = const Color(0xFF1E7A46);
+            statusColor = c.noFast;
             break;
         }
         return Padding(
@@ -310,9 +312,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           : (e.kind == EventKind.fasting
                                 ? Icons.fastfood
                                 : Icons.circle),
-                      color: e.isMajor
-                          ? const Color(0xFFB8860B)
-                          : const Color(0xFF8C1F28),
+                      color: e.isMajor ? c.majorFeast : c.fasting,
                     ),
                     title: Text(
                       L10n.eventName(e),
@@ -341,20 +341,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _legend() {
+    final c = AppColors.of(context);
     return Wrap(
       spacing: 12,
       runSpacing: 6,
       children: [
-        _legendItem(const Color(0xFFB8860B), L10n.t('በዓል', 'Major feast')),
-        _legendItem(const Color(0xFFD9A441), L10n.t('በዓል', 'Feast')),
-        _legendItem(
-          const Color(0xFF8C1F28),
-          L10n.t('የጾም ወቅት', 'Fasting season'),
-        ),
-        _legendItem(
-          const Color(0xFF3E5C9A),
-          L10n.t('ረቡዕ/ዓርብ ጾም', 'Wed/Fri fast'),
-        ),
+        _legendItem(c.majorFeast, L10n.t('በዓል', 'Major feast')),
+        _legendItem(c.feast, L10n.t('በዓል', 'Feast')),
+        _legendItem(c.fasting, L10n.t('የጾም ወቅት', 'Fasting season')),
+        _legendItem(c.weeklyFast, L10n.t('ረቡዕ/ዓርብ ጾም', 'Wed/Fri fast')),
       ],
     );
   }
@@ -428,19 +423,20 @@ class _DayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = AppColors.of(context);
     Color background = Colors.transparent;
-    Color borderColor = const Color(0xFFFFE9C9);
+    Color borderColor = c.dayBorder;
 
     if (isMajorFeast) {
-      background = const Color(0xFFB8860B).withValues(alpha: 0.28);
-      borderColor = const Color(0xFFB8860B);
+      background = c.majorFeast.withValues(alpha: 0.28);
+      borderColor = c.majorFeast;
     } else if (isFeast) {
-      background = const Color(0xFFD9A441).withValues(alpha: 0.35);
-      borderColor = const Color(0xFFD9A441);
+      background = c.feast.withValues(alpha: 0.35);
+      borderColor = c.feast;
     } else if (status == FastStatus.seasonal) {
-      background = const Color(0xFF8C1F28).withValues(alpha: 0.10);
+      background = c.fasting.withValues(alpha: 0.12);
     } else if (status == FastStatus.weekly) {
-      background = const Color(0xFF3E5C9A).withValues(alpha: 0.12);
+      background = c.weeklyFast.withValues(alpha: 0.14);
     }
 
     return Material(
@@ -453,7 +449,7 @@ class _DayCell extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isToday ? const Color(0xFF8C1F28) : borderColor,
+              color: isToday ? c.primary : borderColor,
               width: isToday ? 2 : 1,
             ),
           ),
@@ -471,23 +467,21 @@ class _DayCell extends StatelessWidget {
                         fontWeight: isMajorFeast
                             ? FontWeight.w800
                             : FontWeight.w600,
-                        color: isMajorFeast
-                            ? const Color(0xFF8C1F28)
-                            : Colors.black87,
+                        color: isMajorFeast ? c.primary : c.text,
                       ),
                     ),
                     Text(
                       '$gregDay',
-                      style: const TextStyle(fontSize: 9, color: Colors.grey),
+                      style: TextStyle(fontSize: 9, color: c.gregDay),
                     ),
                   ],
                 ),
               ),
               if (isMajorFeast)
-                const Positioned(
+                Positioned(
                   top: 3,
                   right: 3,
-                  child: Icon(Icons.star, size: 10, color: Color(0xFFB8860B)),
+                  child: Icon(Icons.star, size: 10, color: c.majorFeast),
                 )
               else if (isFeast)
                 Positioned(
@@ -496,8 +490,8 @@ class _DayCell extends StatelessWidget {
                   child: Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFD9A441),
+                    decoration: BoxDecoration(
+                      color: c.feast,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -517,6 +511,7 @@ class _EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = AppColors.of(context);
     final startEt = CalendarMath.ethiopicFromJdn(event.startJdn);
     final endEt = CalendarMath.ethiopicFromJdn(event.endJdn);
     final isFasting = event.kind == EventKind.fasting;
@@ -525,13 +520,13 @@ class _EventTile extends StatelessWidget {
     Color color;
     if (isFasting) {
       icon = Icons.fastfood;
-      color = const Color(0xFF8C1F28);
+      color = c.fasting;
     } else if (event.isMajor) {
       icon = Icons.star;
-      color = const Color(0xFFB8860B);
+      color = c.majorFeast;
     } else {
       icon = Icons.circle;
-      color = const Color(0xFFD9A441);
+      color = c.feast;
     }
 
     String range;

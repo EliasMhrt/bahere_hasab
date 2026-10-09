@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 
 class EducationScreen extends StatelessWidget {
@@ -355,6 +356,7 @@ class EducationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = AppColors.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(L10n.t('ትምህርት', 'Learn'))),
       drawer: const AppDrawer(),
@@ -371,16 +373,16 @@ class EducationScreen extends StatelessWidget {
                   children: [
                     Text(
                       L10n.isAmharic ? am : en,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF8C1F28),
+                        color: c.primary,
                       ),
                     ),
                     Text(
                       L10n.isAmharic ? en : am,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xFF6E4B12),
+                        color: c.weekdayLabel,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -391,9 +393,9 @@ class EducationScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       L10n.isAmharic ? amBody : enBody,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.black.withValues(alpha: 0.75),
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: c.muted),
                     ),
                   ],
                 ),
@@ -401,7 +403,7 @@ class EducationScreen extends StatelessWidget {
             ),
           const SizedBox(height: 8),
           Card(
-            color: const Color(0xFFFFF3D6),
+            color: c.noticeCard,
             margin: const EdgeInsets.only(bottom: 12),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -462,7 +464,7 @@ class EducationScreen extends StatelessWidget {
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.2,
-                        color: Colors.black.withValues(alpha: 0.45),
+                        color: c.faint,
                       ),
                     ),
                   ),

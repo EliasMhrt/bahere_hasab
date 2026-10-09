@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../theme_colors.dart';
 import '../widgets/app_drawer.dart';
 import '../src/bahire_hasab.dart';
 import '../src/calendar_math.dart';
@@ -187,7 +188,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             ? '$value · $nameEn'
                             : '$value · $nameAm',
                         style: TextStyle(
-                          color: Colors.black.withValues(alpha: 0.75),
+                          color: AppColors.of(context).muted,
                         ),
                       ),
                     ),
@@ -446,19 +447,20 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   Widget _stepTitle(int n, String title) {
+    final c = AppColors.of(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
           CircleAvatar(
             radius: 11,
-            backgroundColor: const Color(0xFF8C1F28),
+            backgroundColor: c.primary,
             child: Text(
               '$n',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: c.onPrimary,
               ),
             ),
           ),
@@ -500,11 +502,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           Expanded(
             child: Text(
               line,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF8C1F28),
-                fontFeatures: [FontFeature.tabularFigures()],
+                color: AppColors.of(context).primary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
           ),
@@ -537,7 +539,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   ),
             style: TextStyle(
               fontSize: 12,
-              color: Colors.black.withValues(alpha: 0.6),
+              color: AppColors.of(context).muted,
             ),
           ),
           Text(
@@ -556,6 +558,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       weekdayIndex == 6 ? 8 : 7 - weekdayIndex;
 
   Widget _moveableSection(BuildContext context, BahireHasab bh) {
+    final c = AppColors.of(context);
     final rows = <(String, String, String, bool)>[
       (
         'ጾመ ነነዌ',
@@ -617,11 +620,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (major)
-                      const Padding(
-                        padding: EdgeInsets.only(top: 2),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
                         child: Icon(
                           Icons.star,
-                          color: Color(0xFFB8860B),
+                          color: c.majorFeast,
                           size: 18,
                         ),
                       )
@@ -646,7 +649,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             range,
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.black.withValues(alpha: 0.7),
+                              color: c.muted,
                             ),
                           ),
                         ],
