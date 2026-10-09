@@ -39,21 +39,6 @@ class _ConverterScreenState extends State<ConverterScreen> {
     _ecDay = et.day;
   }
 
-  static const List<String> _gregMonths = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   int _gregDaysInMonth(int year, int month) {
     switch (month) {
       case 1:
@@ -141,7 +126,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
           context,
           label: L10n.t('ወር', 'Month'),
           value: _gcMonth,
-          items: [for (var m = 1; m <= 12; m++) _item(m, _gregMonths[m - 1])],
+          items: [
+            for (var m = 1; m <= 12; m++)
+              _item(m, L10n.gregorianMonthName(m)),
+          ],
           onChanged: (v) => setState(() {
             _gcMonth = v;
             _gcResetDay();
@@ -206,13 +194,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
           value: _ecMonth,
           items: [
             for (var m = 1; m <= 13; m++)
-              _item(
-                m,
-                L10n.isAmharic
-                    ? '${CalendarMath.ethiopicMonthAmharic[m - 1]} '
-                          '(${CalendarMath.ethiopicMonthEnglish[m - 1]})'
-                    : CalendarMath.ethiopicMonthEnglish[m - 1],
-              ),
+              _item(m, L10n.monthName(m)),
           ],
           onChanged: (v) => setState(() {
             _ecMonth = v;
@@ -364,7 +346,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                 style: const TextStyle(fontSize: 13),
               ),
               subtitle: Text(
-                '${_gregMonths[g.month - 1]} ${g.day}, ${g.year}',
+                '${L10n.gregorianMonthName(g.month)} ${g.day}, ${g.year}',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,

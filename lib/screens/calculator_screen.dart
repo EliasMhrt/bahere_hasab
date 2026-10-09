@@ -152,20 +152,25 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              L10n.isAmharic
-                  ? 'የዓመቱ ቁጥሮች ($_year ${L10n.yearSuffix()})'
-                  : 'The year\'s numbers ($_year E.C.)',
+              L10n.tp(
+                'የዓመቱ ቁጥሮች ({year} {suffix})',
+                'The year\'s numbers ({year} {suffix})',
+                {'year': _year, 'suffix': L10n.yearSuffix()},
+              ),
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(
-              L10n.isAmharic
-                  ? 'እንቁጣጣሽ (አዲስ ዓመት): '
-                        '${enkutatash.year}-${enkutatash.month}-${enkutatash.day}'
-                  : 'Enkutatash (Ethiopian New Year): '
-                        '${enkutatash.year}-${enkutatash.month}-${enkutatash.day}',
+              L10n.tp(
+                'እንቁጣጣሽ (አዲስ ዓመት): {date}',
+                'Enkutatash (Ethiopian New Year): {date}',
+                {
+                  'date':
+                      '${enkutatash.year}-${enkutatash.month}-${enkutatash.day}',
+                },
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -178,15 +183,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     SizedBox(
                       width: 150,
                       child: Text(
-                        L10n.isAmharic ? nameAm : nameEn,
+                        L10n.t(nameAm, nameEn),
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
                     Expanded(
                       child: Text(
-                        L10n.isAmharic
-                            ? '$value · $nameEn'
-                            : '$value · $nameAm',
+                        value,
                         style: TextStyle(
                           color: AppColors.of(context).muted,
                         ),
@@ -197,17 +200,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             const SizedBox(height: 8),
             Text(
-              L10n.isAmharic
-                  ? 'ምስጢር ማለት የሒሳቡ የተደበቀ እውቀት ማለት ነው። ወንበር '
-                        'ዓመቱን በ19 ዓመት ዑደት ውስጥ ያስቀምጣል፣ አበቅቴና '
-                        'መጥቅዕ ከእርሱ ይወጣሉ፤ አበቅቴ + መጥቅዕ = 30 '
-                        'መውጣት አለበት። ከነነዌ ጀምሮ ፋሲካና ሌሎቹ '
-                        'ተንቀሳቃሽ በዓላት ይቆጠራሉ።'
-                  : 'ምስጢር (Mister) means the hidden knowledge of the '
-                        'reckoning itself. Wenber places the year in the 19-year '
-                        'cycle; Abektie and Metqi are derived from it, and '
-                        'Abektie + Metqi always = 30. From Nineveh the church '
-                        'counts Easter and all the moveable feasts.',
+              L10n.t(
+                'ምስጢር ማለት የሒሳቡ የተደበቀ እውቀት ማለት ነው። ወንበር '
+                'ዓመቱን በ19 ዓመት ዑደት ውስጥ ያስቀምጣል፣ አበቅቴና '
+                'መጥቅዕ ከእርሱ ይወጣሉ፤ አበቅቴ + መጥቅዕ = 30 '
+                'መውጣት አለበት። ከነነዌ ጀምሮ ፋሲካና ሌሎቹ '
+                'ተንቀሳቃሽ በዓላት ይቆጠራሉ።',
+                'ምስጢር (Mister) means the hidden knowledge of the '
+                'reckoning itself. Wenber places the year in the 19-year '
+                'cycle; Abektie and Metqi are derived from it, and '
+                'Abektie + Metqi always = 30. From Nineveh the church '
+                'counts Easter and all the moveable feasts.',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
@@ -254,9 +258,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              L10n.t(
-                'የሒሳቡ ስሌት እርምጃ በእርምጃ ($_year ${L10n.yearSuffix()})',
-                'Step-by-step calculation ($_year E.C.)',
+              L10n.tp(
+                'የሒሳቡ ስሌት እርምጃ በእርምጃ ({year} {suffix})',
+                'Step-by-step calculation ({year} {suffix})',
+                {'year': _year, 'suffix': L10n.yearSuffix()},
               ),
               style: Theme.of(
                 context,
@@ -283,7 +288,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 'Amete Alem = Amete Mihret + 5500',
               ),
             ),
-            _result(L10n.t('$year + 5500 = $aa', '$year + 5500 = $aa')),
+            _result('$year + 5500 = $aa'),
             const Divider(height: 20),
             _stepTitle(2, L10n.t('መደብን ማውጣት', 'Step 2 · Find the Medeb')),
             _bullet(
@@ -293,9 +298,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             _result(
-              L10n.t(
-                '$aa ÷ 19 = ${aa ~/ 19} ቀሪ $rawW',
-                '$aa ÷ 19 = ${aa ~/ 19} remainder $rawW',
+              L10n.tp(
+                '{a} ÷ 19 = {q} ቀሪ {r}',
+                '{a} ÷ 19 = {q} remainder {r}',
+                {'a': aa, 'q': aa ~/ 19, 'r': rawW},
               ),
             ),
             _result(
@@ -304,7 +310,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       'ቀሪው 0 ስለሆነ መደብ = 19 (0 → 19)',
                       'Since the remainder is 0, Medeb = 19 (0 maps to 19)',
                     )
-                  : L10n.t('መደብ = $rawW', 'Medeb = $rawW'),
+                  : L10n.tp('መደብ = {v}', 'Medeb = {v}', {'v': rawW}),
             ),
             const Divider(height: 20),
             _stepTitle(3, L10n.t('ወንበርን ማውጣት', 'Step 3 · Find the Wenber')),
@@ -312,7 +318,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             _result(
               rawW == 0
                   ? L10n.t('ወንበር = 19 − 1 = 18', 'Wenber = 19 − 1 = 18')
-                  : L10n.t('ወንበር = $rawW − 1 = $w', 'Wenber = $rawW − 1 = $w'),
+                  : L10n.tp(
+                      'ወንበር = {a} − 1 = {b}',
+                      'Wenber = {a} − 1 = {b}',
+                      {'a': rawW, 'b': w},
+                    ),
             ),
             const Divider(height: 20),
             _stepTitle(
@@ -327,10 +337,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             _result(
-              L10n.t(
-                '($w × 11) = ${w * 11} → በ30 ስንካፈል የሚቀረው ቀሪ $ab',
-                '($w × 11) = ${w * 11} → the remainder when divided by 30 '
-                    'is $ab',
+              L10n.tp(
+                '({a} × 11) = {b} → በ30 ስንካፈል የሚቀረው ቀሪ {c}',
+                '({a} × 11) = {b} → the remainder when divided by 30 is {c}',
+                {'a': w, 'b': w * 11, 'c': ab},
               ),
             ),
             _bullet(
@@ -341,16 +351,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             _result(
-              L10n.t(
-                '($w × 19) = ${w * 19} → በ30 ስንካፈል የሚቀረው ቀሪ $metqi',
-                '($w × 19) = ${w * 19} → the remainder when divided by 30 '
-                    'is $metqi',
+              L10n.tp(
+                '({a} × 19) = {b} → በ30 ስንካፈል የሚቀረው ቀሪ {c}',
+                '({a} × 19) = {b} → the remainder when divided by 30 is {c}',
+                {'a': w, 'b': w * 19, 'c': metqi},
               ),
             ),
             _result(
-              L10n.t(
-                'ማረጋገጫ፡ አበቅቴ + መጥቅዕ = $ab + $metqi = ${ab + metqi} ✓',
-                'Check: Abektie + Metqi = $ab + $metqi = ${ab + metqi} ✓',
+              L10n.tp(
+                'ማረጋገጫ፡ አበቅቴ + መጥቅዕ = {a} + {b} = {c} ✓',
+                'Check: Abektie + Metqi = {a} + {b} = {c} ✓',
+                {'a': ab, 'b': metqi, 'c': ab + metqi},
               ),
             ),
             const Divider(height: 20),
@@ -368,17 +379,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ),
             _result(
               metqi > 14
-                  ? L10n.t(
-                      'መጥቅዕ = $metqi > 14 ስለሆነ በመስከረም ይውላል → '
-                          '$metkName $metqi',
-                      'Metqi = $metqi > 14 so it falls in Meskerem → '
-                          '$metkName $metqi',
+                  ? L10n.tp(
+                      'መጥቅዕ = {m} > 14 ስለሆነ በመስከረም ይውላል → {n} {m}',
+                      'Metqi = {m} > 14 so it falls in Meskerem → {n} {m}',
+                      {'m': metqi, 'n': metkName},
                     )
-                  : L10n.t(
-                      'መጥቅዕ = $metqi ≤ 14 ስለሆነ በጥቅምት ይውላል → '
-                          '$metkName $metqi',
-                      'Metqi = $metqi ≤ 14 so it falls in Tikimt → '
-                          '$metkName $metqi',
+                  : L10n.tp(
+                      'መጥቅዕ = {m} ≤ 14 ስለሆነ በጥቅምት ይውላል → {n} {m}',
+                      'Metqi = {m} ≤ 14 so it falls in Tikimt → {n} {m}',
+                      {'m': metqi, 'n': metkName},
                     ),
             ),
             const Divider(height: 20),
@@ -390,13 +399,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             _bullet(
-              L10n.t(
-                '$metkName $metqi በ$wdName ነው የሚውለው',
-                '$metkName $metqi falls on $wdName',
+              L10n.tp(
+                '{n} {m} በ{wd} ነው የሚውለው',
+                '{n} {m} falls on {wd}',
+                {'n': metkName, 'm': metqi, 'wd': wdName},
               ),
             ),
             _result(
-              L10n.t('የ$wdName ተውሳክ = $tewsak', 'Tewsak of $wdName = $tewsak'),
+              L10n.tp(
+                'የ{wd} ተውሳክ = {t}',
+                'Tewsak of {wd} = {t}',
+                {'wd': wdName, 't': tewsak},
+              ),
             ),
             _bullet(
               L10n.t(
@@ -406,21 +420,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ),
             _result(
               mhSum > 30
-                  ? L10n.t(
-                      'መባጃ ሐመር = $metqi + $tewsak = $mhSum − 30 = $mh',
-                      'Mebaja Hamer = $metqi + $tewsak = $mhSum − 30 = $mh',
+                  ? L10n.tp(
+                      'መባጃ ሐመር = {m} + {t} = {s} − 30 = {r}',
+                      'Mebaja Hamer = {m} + {t} = {s} − 30 = {r}',
+                      {'m': metqi, 't': tewsak, 's': mhSum, 'r': mh},
                     )
-                  : L10n.t(
-                      'መባጃ ሐመር = $metqi + $tewsak = $mh',
-                      'Mebaja Hamer = $metqi + $tewsak = $mh',
+                  : L10n.tp(
+                      'መባጃ ሐመር = {m} + {t} = {r}',
+                      'Mebaja Hamer = {m} + {t} = {r}',
+                      {'m': metqi, 't': tewsak, 'r': mh},
                     ),
             ),
             _result(
-              L10n.t(
-                'ስለዚህ ጾመ ነነዌ በ${L10n.monthName(nenewe.month)} '
-                    '${nenewe.day} ይገባል።',
-                'So Tsome Nenewe starts on ${L10n.monthName(nenewe.month)} '
-                    '${nenewe.day}.',
+              L10n.tp(
+                'ስለዚህ ጾመ ነነዌ በ{month} {day} ይገባል።',
+                'So Tsome Nenewe starts on {month} {day}.',
+                {'month': L10n.monthName(nenewe.month), 'day': nenewe.day},
               ),
             ),
             const Divider(height: 20),
@@ -429,12 +444,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               L10n.t('ተንቀሳቃሽ በዓላትን ማውጣት', 'Step 7 · The moveable feasts'),
             ),
             _bullet(
-              L10n.t(
-                'የየበዓሉ ተውሳክ ወደ መባጃ ሐመር ($mh) ተደምሮ፣ ከ30 በላይ '
-                    'ሲሆን 30 ቀንሶ ወደ ቀጠለው ወር ይሸጋገራል።',
-                'Add each feast\'s Tewsak to the Mebaja Hamer ($mh); when the '
-                    'sum exceeds 30, subtract 30 and roll into the next '
-                    'month.',
+              L10n.tp(
+                'የየበዓሉ ተውሳክ ወደ መባጃ ሐመር ({mh}) ተደምሮ፣ ከ30 በላይ '
+                'ሲሆን 30 ቀንሶ ወደ ቀጠለው ወር ይሸጋገራል።',
+                'Add each feast\'s Tewsak to the Mebaja Hamer ({mh}); when the '
+                'sum exceeds 30, subtract 30 and roll into the next month.',
+                {'mh': mh},
               ),
             ),
             const SizedBox(height: 8),
@@ -524,7 +539,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            L10n.isAmharic ? '$nameAm · $nameEn' : '$nameEn · $nameAm',
+            L10n.t(nameAm, nameEn),
             style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
           ),
           Text(
@@ -543,10 +558,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ),
           ),
           Text(
-            L10n.t(
-              '→ ${et.day} ${L10n.monthName(et.month)} ${L10n.yearSuffix()}',
-              '→ ${et.day} ${L10n.monthName(et.month)} ${L10n.yearSuffix()}',
-            ),
+            '→ ${et.day} ${L10n.monthName(et.month)} ${L10n.yearSuffix()}',
             style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
           ),
         ],
@@ -605,9 +617,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              L10n.isAmharic
-                  ? 'ተንቀሳቃሽ በዓላት ($_year ${L10n.yearSuffix()})'
-                  : 'Moveable feasts ($_year E.C.)',
+              L10n.tp(
+                'ተንቀሳቃሽ በዓላት ({year} {suffix})',
+                'Moveable feasts ({year} {suffix})',
+                {'year': _year, 'suffix': L10n.yearSuffix()},
+              ),
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -636,9 +650,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            L10n.isAmharic
-                                ? '$title · $subtitle'
-                                : '$subtitle · $title',
+                            L10n.t(title, subtitle),
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 13.5,

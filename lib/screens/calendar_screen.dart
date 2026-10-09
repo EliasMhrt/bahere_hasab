@@ -324,13 +324,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ],
               const SizedBox(height: 8),
               Text(
-                L10n.isAmharic
-                    ? 'ባህረ ሃሳብ: መደብ ${bh.medeb} · ወንበር '
-                          '${bh.wenber} · አበቅቴ ${bh.abektie} · '
-                          'መጥቅዕ ${bh.metqi}'
-                    : 'Bahire Hasab: medeb ${bh.medeb} · wenber '
-                          '${bh.wenber} · abektie ${bh.abektie} · '
-                          'metqi ${bh.metqi}',
+                '${L10n.t('ባህረ ሃሳብ', 'Bahire Hasab')}: '
+                '${L10n.t('መደብ', 'Medeb')} ${bh.medeb} · '
+                '${L10n.t('ወንበር', 'Wenber')} ${bh.wenber} · '
+                '${L10n.t('አበቅቴ', 'Abektie')} ${bh.abektie} · '
+                '${L10n.t('መጥቅዕ', 'Metqi')} ${bh.metqi}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],

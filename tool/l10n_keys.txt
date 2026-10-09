@@ -1,9 +1,13 @@
+({a} × 11) = {b} → the remainder when divided by 30 is {c}
+({a} × 19) = {b} → the remainder when divided by 30 is {c}
 5 days
 6 days (leap year)
 A Metqi greater than 14 falls in Meskerem; a Metqi of 14 or less falls in Tikimt
+Abektie
 Abektie = the remainder when Wenber × 11 is divided by 30
 Acceptance
 Accessibility
+Add each feast's Tewsak to the Mebaja Hamer ({mh}); when the sum exceeds 30, subtract 30 and roll into the next month.
 Adjustable text size
 Amete Alem = Amete Mihret + 5500
 Amete Mihret
@@ -12,7 +16,9 @@ Any updates to this policy will be published inside the app.
 App calculation notes
 App code and design are © Oryares. The Bahire Hasab reckoning is traditional church heritage. Fonts are provided under open licenses.
 Appearance
+April
 Ascension
+August
 Bahire Hasab
 Bahire Hasab Calculator
 Bahire Hasab calculator
@@ -27,6 +33,7 @@ Calendar
 Celebrated on this day
 Changes
 Changes to this policy
+Check: Abektie + Metqi = {a} + {b} = {c} ✓
 Children
 Colours were chosen carefully for good contrast between text and background.
 Contact
@@ -37,10 +44,12 @@ Date Converter
 Dates are computed using the traditional Bahire Hasab reckoning. Always confirm religious fasts and feasts with your church or clergy.
 Day
 Debre Tabor (Transfiguration)
+December
 Developed by Oryares
 E.C.
 Easter (Resurrection)
 Enkutatash (Ethiopian New Year)
+Enkutatash (Ethiopian New Year): {date}
 Enter a Gregorian date
 Enter an Ethiopian date
 Ethiopian
@@ -48,6 +57,7 @@ Ethiopian year
 Ethiopian → Gregorian
 Ethiopian ⇄ Gregorian
 Ethiopic typeface
+Evangelist
 Events this month
 Every button and section has a clear label for TalkBack (and VoiceOver). You can navigate by swiping with the screen reader.
 Fast of Gahad
@@ -62,6 +72,7 @@ Fasting season
 Feast
 Feast of St. Mary of Zion
 Feast of the Holy Apostles
+February
 Festival & Fasting Calendar
 Festival & fasting calendar
 Festivals and fasting days
@@ -88,7 +99,10 @@ Icons
 If something is hard to use, reach out to Oryares for help.
 In a fasting season
 Intellectual property
+January
 John
+July
+June
 Language
 Large
 Large touch targets
@@ -100,26 +114,40 @@ Linting (dev-only)
 Luke
 Main
 Major feast
+March
 Mark
 Matthew
+May
 Mebaja Hamer = Metqi + Tewsak (subtract 30 if over)
+Mebaja Hamer = {m} + {t} = {r}
+Mebaja Hamer = {m} + {t} = {s} − 30 = {r}
+Medeb
 Medeb = the remainder when Amete Alem is divided by 19
+Medeb = {v}
 Medium
 Megabit
 Meskel (Finding of the True Cross)
 Meskerem
+Metqi
 Metqi = the remainder when Wenber × 19 is divided by 30
+Metqi = {m} > 14 so it falls in Meskerem → {n} {m}
+Metqi = {m} ≤ 14 so it falls in Tikimt → {n} {m}
 Mid-Lent Sunday
 Miyazya
 Monday
 Month
+Moveable feasts ({year} {suffix})
 Nehase
+Newer translations are drafts and may need review; Amharic and English are the reference versions.
+No fasting
 No fasting today
 No major feast or fast this month
 No warranty & liability
 Not a fasting day
 Note: this information is provided in good faith and is not legal advice.
 Notification permission was not granted.
+November
+October
 Overview
 Pagume
 Palm Sunday
@@ -137,11 +165,13 @@ Rikbe Kahanat (Priests' Assembly)
 Saturday
 Screen-reader support
 Sene
+September
 Settings
 Share app
 Shows the current fasting season and date in the notification bar
 Since the remainder is 0, Medeb = 19 (0 maps to 19)
 Small
+So Tsome Nenewe starts on {month} {day}.
 St. Gabriel
 St. George
 St. Mary
@@ -153,18 +183,21 @@ Step 4 · Find the Abektie and Metqi
 Step 5 · Locate the Metqi month
 Step 6 · The Tewsak and the Mebaja Hamer
 Step 7 · The moveable feasts
+Step-by-step calculation ({year} {suffix})
 Stronger colours for easier reading
 Sunday
 System
 Tahsas
 Terms & Conditions
 Testing (dev-only)
+Tewsak of {wd} = {t}
 Text size
 The app holds no internet permission. Only if you switch on the fasting reminder does it ask for the notification permission, and only to show the ongoing reminder on your phone. You can turn it off again in Settings at any time.
 The app is provided "as is". To the extent permitted by law, we accept no liability for any damages.
 The app is suitable for all ages, and we collect no data about children.
 The app relies on open-source components such as Flutter and fonts, which run entirely on your device. Details are in the "Third-Party Data" section.
 The book's worked example is reproduced, step by step. The results match the feast list below.
+The year's numbers ({year} {suffix})
 The year's numbers and feasts
 These terms may be updated; changes will be published in the app.
 Third-Party Data
@@ -182,15 +215,20 @@ Wed/Fri fast
 Wednesday
 Wednesday/Friday fast
 Weekday
+Weekly fast
+Wenber
 Wenber = 19 − 1 = 18
 Wenber = Medeb − 1
+Wenber = {a} − 1 = {b}
 Year
 Yekatit
 You can choose small, medium or large text from Settings. The app also respects your system font size.
 You may use the app freely for personal, informational purposes only. Redistribution, resale or modification without permission is not allowed.
 Your preferences stay on your device only — nothing is recorded or sent anywhere.
+{a} ÷ 19 = {q} remainder {r}
+{n} {m} falls on {wd}
 © Oryares
+ምስጢር (Mister) means the hidden knowledge of the reckoning itself. Wenber places the year in the 19-year cycle; Abektie and Metqi are derived from it, and Abektie + Metqi always = 30. From Nineveh the church counts Easter and all the moveable feasts.
 አማርኛ
+• Foundational rules: all reckoning begins by converting the Ethiopian year (Amete Mihret) into the Era of the World (Amete Alem) by adding 5,500.\n• Wenber = (Amete Alem ÷ 19 remainder) − 1, defaulting to 18 when the remainder is 0.\n• Abekte = (Wenber × 11) mod 30 and Metki = (Wenber × 19) mod 30; their sum is always 30.\n• Rollover validation: any addition exceeding 30 automatically shifts into the next Ethiopian month by subtracting 30.\n• Worked check: 2001 E.C. → Amete Alem 7501, Wenber 14, Abekte 4, Metki 26.\n• Leap-year trigger: divide the Amete Alem by 4; a zero remainder designates the year of John, so Pagume renders 6 days instead of 5.\n• The app converts the Ethiopian calendar (Beyene–Kudlek, epoch 1724221) and computes the moveable feasts with the same Tewsak table used by the church.
 • Your name, email, phone number or address.\n• Device identifiers, IP addresses or location data.\n• A usage history of how you use the app.\n• Cookies or advertising identifiers.
-Weekly fast
-No fasting

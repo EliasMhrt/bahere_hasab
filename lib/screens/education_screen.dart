@@ -372,7 +372,7 @@ class EducationScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      L10n.isAmharic ? am : en,
+                      L10n.t(am, en),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
@@ -380,19 +380,19 @@ class EducationScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      L10n.isAmharic ? en : am,
+                      L10n.language == AppLanguage.english ? am : en,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: c.weekdayLabel,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      L10n.isAmharic ? amIntro : enIntro,
+                      L10n.t(amIntro, enIntro),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      L10n.isAmharic ? amBody : enBody,
+                      L10n.t(amBody, enBody),
                       style: Theme.of(
                         context,
                       ).textTheme.bodyMedium?.copyWith(color: c.muted),
@@ -416,44 +416,45 @@ class EducationScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    L10n.isAmharic
-                        ? '• መሠረታዊ ሕጎች፡ ማንኛውም የዘመን ስሌት የሚጀምረው የኢትዮጵያኛን '
-                              'ዓመት (ዓመተ ምሕረት) ከፍጥረተ ዓለም ጋር በማያያዝ '
-                              '5500 በመደመር ዓመተ ዓለምን በማውጣት ነው።\n'
-                              '• ወንበር = (ዓመተ ዓለም ÷ 19 ቀሪ) − 1፤ ቀሪው 0 ከሆነ '
-                              'ወንበር 18 ይሆናል።\n'
-                              '• አበቅቴ = (ወንበር × 11) mod 30፣ መጥቅዕ = (ወንበር × '
-                              '19) mod 30፤ ድምራቸው ሁልጊዜ 30 ነው።\n'
-                              '• የወር ማሻገር (Rollover)፡ ድምሩ ከ30 በላይ ሲሆን 30 '
-                              'በመቀነስ ቀኑ ወደ ቀጠለው ወር ይሸጋገራል።\n'
-                              '• ማረጋገጫ ምሳሌ፡ 2001 ዓ.ም. → ዓመተ ዓለም 7501፣ '
-                              'ወንበር 14፣ አበቅቴ 4፣ መጥቅዕ 26።\n'
-                              '• የዘመን መለወጫ (ዝለት ዓመት)፡ ዓመተ ዓለም በ4 '
-                              'ሲካፈል ቀሪው 0 ሲሆን ዘመነ ዮሐንስ ስለሆነ ጳጉሜን '
-                              '6 ቀን ይሆናል።\n'
-                              '• አፕ የኢትዮጵያ አቆጣጠርን (Beyene–Kudlek፣ '
-                              '1724221) እና የፋሲካን የቤተክርስቲያን ሒሳብ '
-                              'በመጠቀም ተዘዋዋሪ በዓላትን ከተውሳኮቹ ጋር '
-                              'ተመሳሳይ የሆነ ውጤት ያስገኛል።'
-                        : '• Foundational rules: all reckoning begins by '
-                              'converting the Ethiopian year (Amete Mihret) into '
-                              'the Era of the World (Amete Alem) by adding 5,500.\n'
-                              '• Wenber = (Amete Alem ÷ 19 remainder) − 1, '
-                              'defaulting to 18 when the remainder is 0.\n'
-                              '• Abekte = (Wenber × 11) mod 30 and Metki = (Wenber '
-                              '× 19) mod 30; their sum is always 30.\n'
-                              '• Rollover validation: any addition exceeding 30 '
-                              'automatically shifts into the next Ethiopian month '
-                              'by subtracting 30.\n'
-                              '• Worked check: 2001 E.C. → Amete Alem 7501, Wenber '
-                              '14, Abekte 4, Metki 26.\n'
-                              '• Leap-year trigger: divide the Amete Alem by 4; a '
-                              'zero remainder designates the year of John, so '
-                              'Pagume renders 6 days instead of 5.\n'
-                              '• The app converts the Ethiopian calendar '
-                              '(Beyene–Kudlek, epoch 1724221) and computes the '
-                              'moveable feasts with the same Tewsak table used by '
-                              'the church.',
+                    L10n.t(
+                      '• መሠረታዊ ሕጎች፡ ማንኛውም የዘመን ስሌት የሚጀምረው የኢትዮጵያኛን '
+                      'ዓመት (ዓመተ ምሕረት) ከፍጥረተ ዓለም ጋር በማያያዝ '
+                      '5500 በመደመር ዓመተ ዓለምን በማውጣት ነው።\n'
+                      '• ወንበር = (ዓመተ ዓለም ÷ 19 ቀሪ) − 1፤ ቀሪው 0 ከሆነ '
+                      'ወንበር 18 ይሆናል።\n'
+                      '• አበቅቴ = (ወንበር × 11) mod 30፣ መጥቅዕ = (ወንበር × '
+                      '19) mod 30፤ ድምራቸው ሁልጊዜ 30 ነው።\n'
+                      '• የወር ማሻገር (Rollover)፡ ድምሩ ከ30 በላይ ሲሆን 30 '
+                      'በመቀነስ ቀኑ ወደ ቀጠለው ወር ይሸጋገራል።\n'
+                      '• ማረጋገጫ ምሳሌ፡ 2001 ዓ.ም. → ዓመተ ዓለም 7501፣ '
+                      'ወንበር 14፣ አበቅቴ 4፣ መጥቅዕ 26።\n'
+                      '• የዘመን መለወጫ (ዝለት ዓመት)፡ ዓመተ ዓለም በ4 '
+                      'ሲካፈል ቀሪው 0 ሲሆን ዘመነ ዮሐንስ ስለሆነ ጳጉሜን '
+                      '6 ቀን ይሆናል።\n'
+                      '• አፕ የኢትዮጵያ አቆጣጠርን (Beyene–Kudlek፣ '
+                      '1724221) እና የፋሲካን የቤተክርስቲያን ሒሳብ '
+                      'በመጠቀም ተዘዋዋሪ በዓላትን ከተውሳኮቹ ጋር '
+                      'ተመሳሳይ የሆነ ውጤት ያስገኛል።',
+                      '• Foundational rules: all reckoning begins by '
+                      'converting the Ethiopian year (Amete Mihret) into '
+                      'the Era of the World (Amete Alem) by adding 5,500.\n'
+                      '• Wenber = (Amete Alem ÷ 19 remainder) − 1, '
+                      'defaulting to 18 when the remainder is 0.\n'
+                      '• Abekte = (Wenber × 11) mod 30 and Metki = (Wenber '
+                      '× 19) mod 30; their sum is always 30.\n'
+                      '• Rollover validation: any addition exceeding 30 '
+                      'automatically shifts into the next Ethiopian month '
+                      'by subtracting 30.\n'
+                      '• Worked check: 2001 E.C. → Amete Alem 7501, Wenber '
+                      '14, Abekte 4, Metki 26.\n'
+                      '• Leap-year trigger: divide the Amete Alem by 4; a '
+                      'zero remainder designates the year of John, so '
+                      'Pagume renders 6 days instead of 5.\n'
+                      '• The app converts the Ethiopian calendar '
+                      '(Beyene–Kudlek, epoch 1724221) and computes the '
+                      'moveable feasts with the same Tewsak table used by '
+                      'the church.',
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Center(

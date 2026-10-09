@@ -28,6 +28,23 @@ class L10n {
   static String t(String amharic, String english) =>
       forLanguage(lang.value, amharic, english);
 
+  /// Like [t], but substitutes `{name}` placeholders with values from
+  /// [params]. The English template doubles as the translation key, so strings
+  /// that embed runtime values can still be translated in full.
+  static String tp(
+    String amharic,
+    String english, [
+    Map<String, Object?>? params,
+  ]) {
+    var value = forLanguage(lang.value, amharic, english);
+    if (params != null) {
+      for (final entry in params.entries) {
+        value = value.replaceAll('{${entry.key}}', '${entry.value}');
+      }
+    }
+    return value;
+  }
+
   /// Resolves a string for [language] without touching the active language.
   static String forLanguage(
     AppLanguage language,
@@ -109,6 +126,40 @@ class L10n {
     'ኖቬ',
     'ዲሴ',
   ];
+
+  static const List<String> _gregorianFullAmharic = [
+    'ጃንዋሪ',
+    'ፌብሩዋሪ',
+    'ማርች',
+    'ኤፕሪል',
+    'ሜይ',
+    'ጁን',
+    'ጁላይ',
+    'ኦገስት',
+    'ሴፕቴምበር',
+    'ኦክቶበር',
+    'ኖቬምበር',
+    'ዲሴምበር',
+  ];
+
+  static const List<String> _gregorianFullEnglish = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  /// Full Gregorian month name for the active language.
+  static String gregorianMonthName(int month) =>
+      t(_gregorianFullAmharic[month - 1], _gregorianFullEnglish[month - 1]);
 
   static String _clip(String value, int max) {
     final runes = value.runes.toList(growable: false);

@@ -138,13 +138,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   const SizedBox(height: 8),
                   Text(
-                    L10n.isAmharic
-                        ? 'ወንበር: ${bh.wenber} · አበቅቴ: ${bh.abektie} · '
-                              'መጥቅዕ: ${bh.metqi} · ወንጌላዊ: '
-                              '${bh.evangelistAmharic}'
-                        : 'Wenber: ${bh.wenber} · Abektie: ${bh.abektie} · '
-                              'Metqi: ${bh.metqi} · Evangelist: '
-                              '${bh.evangelistEnglish}',
+                    '${L10n.t('ወንበር', 'Wenber')}: ${bh.wenber} · '
+                    '${L10n.t('አበቅቴ', 'Abektie')}: ${bh.abektie} · '
+                    '${L10n.t('መጥቅዕ', 'Metqi')}: ${bh.metqi} · '
+                    '${L10n.t('ወንጌላዊ', 'Evangelist')}: '
+                    '${L10n.evangelistName(bh)}',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

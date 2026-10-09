@@ -80,6 +80,22 @@ void main() {
     'Saturday',
     'E.C.',
     'Amete Mihret',
+    // notification_service.dart L10n.forLanguage calls
+    'Weekly fast',
+    'No fasting',
+    // full Gregorian month names
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   };
 
   final all = <String>{...ui, ...data}.toList()..sort();
@@ -93,17 +109,18 @@ void main() {
 
 Set<String> _extractUiStrings(String src) {
   final out = <String>{};
-  var idx = 0;
-  const needle = 'L10n.t(';
-  while (true) {
-    idx = src.indexOf(needle, idx);
-    if (idx == -1) break;
-    final open = idx + needle.length - 1; // index of '('
-    final args = _parseArgs(src, open);
-    if (args.length >= 2 && args[1] != null) {
-      out.add(args[1]!);
+  for (final needle in const ['L10n.t(', 'L10n.tp(']) {
+    var idx = 0;
+    while (true) {
+      idx = src.indexOf(needle, idx);
+      if (idx == -1) break;
+      final open = idx + needle.length - 1; // index of '('
+      final args = _parseArgs(src, open);
+      if (args.length >= 2 && args[1] != null) {
+        out.add(args[1]!);
+      }
+      idx = open + 1;
     }
-    idx = open + 1;
   }
   return out;
 }

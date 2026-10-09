@@ -2,5 +2,5 @@
 class AppInfo {
   AppInfo._();
 
-  static const String version = '1.3.0';
+  static const String version = '1.4.0';
 }

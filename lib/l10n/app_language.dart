@@ -1,22 +1,12 @@
 /// The languages the app can display. Amharic and English are the originals;
-/// the rest are community translations that fall back to Amharic (Ethiopic
-/// script languages) or English (Latin script languages) when a string has not
-/// been translated yet.
+/// Tigrinya, Afar and Oromo are community translations. Every language is
+/// fully translated, so there is no fallback at runtime.
 enum AppLanguage {
   amharic('am', 'አማርኛ', 'Amharic', true),
   english('en', 'English', 'English', false),
   tigrinya('ti', 'ትግርኛ', 'Tigrinya', true),
-  geez('gez', 'ግዕዝ', "Ge'ez", true),
-  oromo('om', 'Afaan Oromoo', 'Oromo', false),
-  somali('so', 'Soomaali', 'Somali', false),
   afar('aa', 'Qafar', 'Afar', false),
-  sidama('sid', 'Sidaamu Afoo', 'Sidama', false),
-  wolaytta('wal', 'Wolaytta', 'Wolaytta', false),
-  hadiyya('hdy', 'Hadiyyisa', 'Hadiyya', false),
-  gamo('gmv', 'Gamo', 'Gamo', false),
-  gurage('gru', 'ጉራጌ', 'Gurage', true),
-  silte('stv', 'ስልጥኛ', "Silt'e", true),
-  harari('har', 'ሐረሪ', 'Harari', true);
+  oromo('om', 'Afaan Oromoo', 'Oromo', false);
 
   const AppLanguage(
     this.code,
