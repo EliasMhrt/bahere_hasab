@@ -1,0 +1,196 @@
+5 days
+6 days (leap year)
+A Metqi greater than 14 falls in Meskerem; a Metqi of 14 or less falls in Tikimt
+Abektie = the remainder when Wenber × 11 is divided by 30
+Acceptance
+Accessibility
+Adjustable text size
+Amete Alem = Amete Mihret + 5500
+Amete Mihret
+Annunciation Show (Debre Zeit)
+Any updates to this policy will be published inside the app.
+App calculation notes
+App code and design are © Oryares. The Bahire Hasab reckoning is traditional church heritage. Fonts are provided under open licenses.
+Appearance
+Ascension
+Bahire Hasab
+Bahire Hasab Calculator
+Bahire Hasab calculator
+Bahire Hasab is a fully offline reference app. It does not require an account, does not use the internet, and has no analytics, advertising or tracking. We do not collect, store, or transmit any personal information about you.
+Bahire Hasab is fully offline. The open-source components listed below run entirely on your device. The app makes no network connections and shares no data with any third party.
+Bahire Hasab · Ethiopian Calendar
+Bahire Hasab: an offline Ethiopian Orthodox calendar (feasts, fasts and the Bahire Hasab method).
+Buttons and list items have generous touch areas.
+By using the app you agree to these terms. If you do not agree, please stop using the app.
+Calculator
+Calendar
+Celebrated on this day
+Changes
+Changes to this policy
+Children
+Colours were chosen carefully for good contrast between text and background.
+Contact
+Cupertino icons
+Dark
+Data we do not collect
+Date Converter
+Dates are computed using the traditional Bahire Hasab reckoning. Always confirm religious fasts and feasts with your church or clergy.
+Day
+Debre Tabor (Transfiguration)
+Developed by Oryares
+E.C.
+Easter (Resurrection)
+Enkutatash (Ethiopian New Year)
+Enter a Gregorian date
+Enter an Ethiopian date
+Ethiopian
+Ethiopian year
+Ethiopian → Gregorian
+Ethiopian ⇄ Gregorian
+Ethiopic typeface
+Events this month
+Every button and section has a clear label for TalkBack (and VoiceOver). You can navigate by swiping with the screen reader.
+Fast of Gahad
+Fast of Gahad (Christmas Eve)
+Fast of Nineveh
+Fast of Tsige (Zemene Tsige)
+Fast of the Apostles
+Fast of the Assumption (Filseta)
+Fast of the Prophets (Advent)
+Fasting reminder
+Fasting season
+Feast
+Feast of St. Mary of Zion
+Feast of the Holy Apostles
+Festival & Fasting Calendar
+Festival & fasting calendar
+Festivals and fasting days
+Filseta (Dormition of St. Mary)
+For questions or feedback, please contact the developer (Oryares):\nEmail: oryares.01@gmail.com
+For questions, contact the developer (Oryares):\nEmail: oryares.01@gmail.com
+Friday
+Full fasting season
+Full license texts are available on each project's website. Versions used are those listed in the pubspec.yaml file.
+Genna (Ethiopian Christmas)
+Ginbot
+Go to today
+Good Friday (Crucifixion)
+Great Lent (Hudade)
+Gregorian
+Gregorian → Ethiopian
+Hamle
+Hidar
+High contrast
+Home
+How Bahire Hasab works
+Icon generator (dev-only)
+Icons
+If something is hard to use, reach out to Oryares for help.
+In a fasting season
+Intellectual property
+John
+Language
+Large
+Large touch targets
+Learn
+Legal
+License to use
+Light
+Linting (dev-only)
+Luke
+Main
+Major feast
+Mark
+Matthew
+Mebaja Hamer = Metqi + Tewsak (subtract 30 if over)
+Medeb = the remainder when Amete Alem is divided by 19
+Medium
+Megabit
+Meskel (Finding of the True Cross)
+Meskerem
+Metqi = the remainder when Wenber × 19 is divided by 30
+Mid-Lent Sunday
+Miyazya
+Monday
+Month
+Nehase
+No fasting today
+No major feast or fast this month
+No warranty & liability
+Not a fasting day
+Note: this information is provided in good faith and is not legal advice.
+Notification permission was not granted.
+Overview
+Pagume
+Palm Sunday
+Peraqlitos (Pentecost)
+Permissions
+Personalization
+Preferences stored on your device
+Preferences such as language, text size and appearance stay only on your device and are never transmitted. The fasting-reminder setting (on/off) is stored on your device too. Everything is cleared when the app is uninstalled.
+Privacy Policy
+Programming language
+Quick adjustments
+Readable colours
+Result
+Rikbe Kahanat (Priests' Assembly)
+Saturday
+Screen-reader support
+Sene
+Settings
+Share app
+Shows the current fasting season and date in the notification bar
+Since the remainder is 0, Medeb = 19 (0 maps to 19)
+Small
+St. Gabriel
+St. George
+St. Mary
+St. Michael
+Step 1 · Find the Era of the World
+Step 2 · Find the Medeb
+Step 3 · Find the Wenber
+Step 4 · Find the Abektie and Metqi
+Step 5 · Locate the Metqi month
+Step 6 · The Tewsak and the Mebaja Hamer
+Step 7 · The moveable feasts
+Stronger colours for easier reading
+Sunday
+System
+Tahsas
+Terms & Conditions
+Testing (dev-only)
+Text size
+The app holds no internet permission. Only if you switch on the fasting reminder does it ask for the notification permission, and only to show the ongoing reminder on your phone. You can turn it off again in Settings at any time.
+The app is provided "as is". To the extent permitted by law, we accept no liability for any damages.
+The app is suitable for all ages, and we collect no data about children.
+The app relies on open-source components such as Flutter and fonts, which run entirely on your device. Details are in the "Third-Party Data" section.
+The book's worked example is reproduced, step by step. The results match the feast list below.
+The year's numbers and feasts
+These terms may be updated; changes will be published in the app.
+Third-Party Data
+Third-party software
+Thursday
+Tikimt
+Timkat (Epiphany)
+Tir
+Today
+Tuesday
+Turn on stronger colour contrast for easier reading, useful for low-vision users.
+UI framework
+Verify the dates
+Wed/Fri fast
+Wednesday
+Wednesday/Friday fast
+Weekday
+Wenber = 19 − 1 = 18
+Wenber = Medeb − 1
+Year
+Yekatit
+You can choose small, medium or large text from Settings. The app also respects your system font size.
+You may use the app freely for personal, informational purposes only. Redistribution, resale or modification without permission is not allowed.
+Your preferences stay on your device only — nothing is recorded or sent anywhere.
+© Oryares
+አማርኛ
+• Your name, email, phone number or address.\n• Device identifiers, IP addresses or location data.\n• A usage history of how you use the app.\n• Cookies or advertising identifiers.
+Weekly fast
+No fasting

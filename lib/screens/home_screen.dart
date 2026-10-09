@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n.dart';
+import '../share_service.dart';
 import '../theme_colors.dart';
 import '../src/bahire_hasab.dart';
 import '../src/calendar_math.dart';
@@ -67,6 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
+            tooltip: L10n.t('መተግበሪያውን አጋራ', 'Share app'),
+            icon: const Icon(Icons.share),
+            onPressed: ShareService.shareApp,
+          ),
+          IconButton(
             tooltip: L10n.t('ወደ እንግሊዝኛ', 'አማርኛ'),
             icon: const Icon(Icons.translate),
             onPressed: () {
@@ -107,11 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    L10n.isAmharic
-                        ? '${CalendarMath.weekdayAmharic[weekday]} · '
-                              'የዓመቱ መመለሻ ${et.year} ዓ.ም. (ዓመተ ምህረት)'
-                        : '${CalendarMath.weekdayEnglish[weekday]} · '
-                              'Year ${et.year} E.C. (Amete Mihret)',
+                    '${L10n.weekdayName(weekday)} · '
+                    '${L10n.t('የዓመቱ መመለሻ', 'Year')} ${et.year} '
+                    '${L10n.yearSuffix()} (${L10n.eraName()})',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 12),
@@ -123,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .map(
                             (e) => L10n.isAmharic
                                 ? '${e.title} (${e.subtitle})'
-                                : e.subtitle,
+                                : L10n.eventName(e),
                           )
                           .join(' · '),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -212,9 +216,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Color color;
     switch (status) {
       case FastStatus.seasonal:
-        label =
-            season?.nameFor(L10n.isAmharic) ??
-            L10n.t('የጾም ወቅት', 'Full fasting season');
+        label = season != null
+            ? L10n.seasonName(season)
+            : L10n.t('የጾም ወቅት', 'Full fasting season');
         icon = Icons.fastfood;
         color = c.fasting;
         break;

@@ -102,7 +102,6 @@ class NotificationService {
     AppLanguage language,
     bool gregorian,
   ) {
-    final amharic = language == AppLanguage.amharic;
     final now = DateTime.now();
     final jdn = CalendarMath.jdnFromGregorian(now.year, now.month, now.day);
     final season = Festivals.fastingSeasonOnJdn(jdn);
@@ -112,9 +111,9 @@ class NotificationService {
     if (season != null) {
       seasonLabel = L10n.seasonNameFor(language, season);
     } else if (status == FastStatus.weekly) {
-      seasonLabel = amharic ? 'ሳምንታዊ ጾም' : 'Weekly fast';
+      seasonLabel = L10n.forLanguage(language, 'ሳምንታዊ ጾም', 'Weekly fast');
     } else {
-      seasonLabel = amharic ? 'ጾም የለም' : 'No fasting';
+      seasonLabel = L10n.forLanguage(language, 'ጾም የለም', 'No fasting');
     }
 
     final String dateLabel;
@@ -126,11 +125,13 @@ class NotificationService {
       final et = CalendarMath.ethiopicFromJdn(jdn);
       dateLabel =
           '${L10n.shortMonthNameFor(language, et.month)} '
-          '${et.day}, ${et.year} ${amharic ? 'ዓ.ም.' : 'E.C.'}';
+          '${et.day}, ${et.year} ${L10n.forLanguage(language, 'ዓ.ም.', 'E.C.')}';
     }
 
     return (
-      title: '${amharic ? 'ባህረ ሃሳብ' : 'Bahire Hasab'} · $seasonLabel',
+      title:
+          '${L10n.forLanguage(language, 'ባህረ ሃሳብ', 'Bahire Hasab')} · '
+          '$seasonLabel',
       text: dateLabel,
     );
   }
@@ -152,13 +153,16 @@ class NotificationService {
   static Future<void> saveLanguage(AppLanguage language) async {
     await FlutterForegroundTask.saveData(
       key: _kLanguageKey,
-      value: language == AppLanguage.amharic ? 0 : 1,
+      value: language.index,
     );
   }
 
   static Future<AppLanguage> readLanguage() async {
     final value = await FlutterForegroundTask.getData<int>(key: _kLanguageKey);
-    return value == 1 ? AppLanguage.english : AppLanguage.amharic;
+    if (value == null || value < 0 || value >= AppLanguage.values.length) {
+      return AppLanguage.amharic;
+    }
+    return AppLanguage.values[value];
   }
 
   /// True when the app has not been opened within [reminderInactivityTimeout].

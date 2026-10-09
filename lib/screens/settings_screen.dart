@@ -23,17 +23,39 @@ class SettingsScreen extends StatelessWidget {
               _section(
                 context,
                 L10n.t('ቋንቋ', 'Language'),
-                SegmentedButton<String>(
-                  segments: const [
-                    ButtonSegment(value: 'am', label: Text('አማርኛ')),
-                    ButtonSegment(value: 'en', label: Text('English')),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DropdownButtonFormField<AppLanguage>(
+                      initialValue: L10n.lang.value,
+                      isExpanded: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                      ),
+                      items: [
+                        for (final language in AppLanguage.values)
+                          DropdownMenuItem(
+                            value: language,
+                            child: Text(language.displayLabel),
+                          ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) L10n.lang.value = value;
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      L10n.t(
+                        'አዲሶቹ ትርጉሞች በማሽን የተዘጋጁ ናቸው፤ ማሻሻያ ሲያስፈልግ አማርኛ ይመልከቱ።',
+                        'Newer translations are drafts and may need review; '
+                            'Amharic and English are the reference versions.',
+                      ),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.of(context).muted,
+                      ),
+                    ),
                   ],
-                  selected: {L10n.isAmharic ? 'am' : 'en'},
-                  onSelectionChanged: (sel) {
-                    L10n.lang.value = sel.first == 'am'
-                        ? AppLanguage.amharic
-                        : AppLanguage.english;
-                  },
                 ),
               ),
               _section(

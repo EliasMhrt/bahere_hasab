@@ -10,7 +10,13 @@ An offline Ethiopian Orthodox Tewahedo calendar app — calculates feasts, fasts
 - Step-by-step Bahire Hasab calculator (የባህረ ሃሳብ ሂሳብ)
 - Date converter between Ethiopic and Gregorian (ቀን መለወጫ)
 - Learn the Bahire Hasab method in brief (ትምህርት)
-- Bilingual: Amharic & English
+- Multilingual: Amharic & English plus Tigrinya, Ge'ez, Afaan Oromoo, Somali,
+  Afar, Sidama, Wolaytta, Hadiyya, Gamo, Gurage (Sebat Bet), Silt'e and Harari.
+  Amharic and English are the reference versions; the newer translations are
+  drafts and fall back to Amharic (Ethiopic-script) or English (Latin-script)
+  where a string is not yet translated
+- Follows the system light/dark theme by default
+- Share the app straight from the home screen or the side menu
 - Optional fasting reminder — a persistent notification that names the
   current fasting season and rotates between the Ethiopian and Gregorian date
 - Offline, no tracking; asks for notification permission only if you enable the

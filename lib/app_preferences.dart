@@ -10,7 +10,7 @@ class AppPrefs {
     AppTextScale.medium,
   );
   static final ValueNotifier<AppThemeMode> themeMode = ValueNotifier(
-    AppThemeMode.light,
+    AppThemeMode.system,
   );
   static final ValueNotifier<bool> highContrast = ValueNotifier(false);
   static final ValueNotifier<bool> reminder = ValueNotifier(false);

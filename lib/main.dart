@@ -92,7 +92,9 @@ class _BahereHasabAppState extends State<BahereHasabApp>
           child: child!,
         );
       },
-      locale: L10n.isAmharic ? const Locale('am') : const Locale('en'),
+      locale: L10n.lang.value.usesEthiopicScript
+          ? const Locale('am')
+          : const Locale('en'),
       home: HomeScreen(
         key: ValueKey(
           '${L10n.lang.value}-${AppPrefs.themeMode.value}-${AppPrefs.textScale.value}-${AppPrefs.highContrast.value}',

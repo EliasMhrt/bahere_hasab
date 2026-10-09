@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../app_info.dart';
 import '../l10n.dart';
+import '../share_service.dart';
 import '../theme_colors.dart';
 import '../screens/accessibility_screen.dart';
 import '../screens/calculator_screen.dart';
@@ -93,6 +95,14 @@ class AppDrawer extends StatelessWidget {
                         label: L10n.t('ትምህርት', 'Learn'),
                         onTap: () => _go(context, const EducationScreen()),
                       ),
+                      _Item(
+                        icon: Icons.share,
+                        label: L10n.t('መተግበሪያውን አጋራ', 'Share app'),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          ShareService.shareApp();
+                        },
+                      ),
                       const Divider(height: 24),
                       _GroupLabel(L10n.t('ማስተካከያ', 'Personalization')),
                       _Item(
@@ -131,8 +141,8 @@ class AppDrawer extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Text(
                 L10n.t(
-                  'በ ኦርያሬስ የተሰራ · ስሪት 1.1.0',
-                  'Developed by Oryares · v1.1.0',
+                  'በ ኦርያሬስ የተሰራ · ስሪት ${AppInfo.version}',
+                  'Developed by Oryares · v${AppInfo.version}',
                 ),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12, color: c.faint),
